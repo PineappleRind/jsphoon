@@ -9,7 +9,7 @@ export type Phase = 0.0 | 0.25 | 0.5 | 0.75;
  * selector (0.0, 0.25, 0.5, 0.75), obtain
  * the true, corrected phase time.
  */
-export function truePhase(k: number, moonPhase: Phase) {
+export function correctPhase(k: number, moonPhase: Phase) {
 	let apcor = false;
 	k += moonPhase;
 	// Time in Julian centuries from 1900 January 0.5
@@ -31,9 +31,10 @@ export function truePhase(k: number, moonPhase: Phase) {
 	// Moon's argument of latitude
 	const moonArgumentOfLatitude =
 		21.2964 +
-		385.81691806 * k +
-		0.0016528 * julianTime ** 2 +
+		390.67050646 * k -
+		0.0016528 * julianTime ** 2 -
 		0.00000239 * julianTime ** 3;
+
 	// Corrections for New and Full moon
 	if (moonPhase < 0.01 || Math.abs(moonPhase - 0.5) < 0.01) {
 		phaseTime +=
@@ -87,7 +88,7 @@ export function truePhase(k: number, moonPhase: Phase) {
 	}
 	if (!apcor)
 		throw new Error(
-			"TRUEPHASE (moon/truePhase.ts) called with invalid phase selector",
+			"TRUEPHASE (moon/correctPhase.ts) called with invalid phase selector",
 		);
 	return phaseTime;
 }

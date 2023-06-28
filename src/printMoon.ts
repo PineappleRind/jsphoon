@@ -1,7 +1,7 @@
 import { ASPECT_RATIO } from "@/constants/settings";
 import { find2SurroundingPhases } from "@/calculations/findSurroundingPhase";
 import { unixToJulian } from "@/utils/date";
-import { getPhase } from "@/utils/phase";
+import { getPhase } from "@/calculations/phase";
 import { type Settings } from "@/frontend/settings";
 import moons from "@/moon";
 

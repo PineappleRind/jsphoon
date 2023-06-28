@@ -4,7 +4,6 @@ import {
 	MOON_ANGULAR_SIZE,
 	EARTH_ORBIT_AXIS,
 	MOON_SEMIMAJOR_AXIS,
-	LUNATIONS_BASE,
 	EARTH_ECCENTRICITY,
 	EPOCH,
 	SUN_ECLIPTIC_LONGITUDE_EPOCH,
@@ -15,7 +14,6 @@ import {
 	MOON_MEAN_LONGITUDE,
 	MOON_LONGITUDE_NODE,
 	SYNODIC_MONTH,
-	MOON_PARALLAX,
 } from "@/constants/phase";
 
 const { radians, degrees } = convertAngle;
@@ -30,13 +28,13 @@ export type MoonPhaseInfo = {
 	sunAngularDiameter: number;
 };
 
-function kepler(angle: number, ecc: number) {
+export function kepler(angle: number, ecc: number) {
 	const epsilon = 1e-6;
-
-	let theta = radians(angle);
+	const angleRadians = radians(angle);
+	let theta = angleRadians;
 	let delta: number;
 	while (true) {
-		delta = theta - ecc * Math.sin(theta) - angle;
+		delta = theta - ecc * Math.sin(theta) - angleRadians;
 		theta -= delta / (1 - ecc * Math.cos(theta));
 		if (Math.abs(delta) <= epsilon) break;
 	}
@@ -63,8 +61,8 @@ export function getPhase(julianDate: number) {
 	const sunMeanAnomaly = confineAngle((360 / 365.2422) * day); //Mean anomaly of the Sun
 	const epoch = confineAngle(
 		sunMeanAnomaly +
-		SUN_ECLIPTIC_LONGITUDE_EPOCH -
-		SUN_ECLIPTIC_LONGITUDE_PERIGEE,
+			SUN_ECLIPTIC_LONGITUDE_EPOCH -
+			SUN_ECLIPTIC_LONGITUDE_PERIGEE,
 	); // Convert from perigee
 
 	let eccentricity = kepler(epoch, EARTH_ECCENTRICITY); // Solve equation of Kepler
@@ -134,7 +132,7 @@ export function getPhase(julianDate: number) {
 		(MOON_SEMIMAJOR_AXIS * (1 - MOON_ECCENTRICITY * MOON_ECCENTRICITY)) /
 		(1 +
 			MOON_ECCENTRICITY *
-			Math.cos(radians(moon_anom_correct + centre_eq_correct)));
+				Math.cos(radians(moon_anom_correct + centre_eq_correct)));
 
 	const angularDiameterFraction = distance / MOON_SEMIMAJOR_AXIS; // Calculate Moon's angular diameter
 	// Moon's angular diameter in degrees
@@ -143,7 +141,7 @@ export function getPhase(julianDate: number) {
 	const phaseRadians = (1 - Math.cos(radians(moon_age))) / 2; // Phase of the Moon
 	const moonAgeInMonth = SYNODIC_MONTH * (confineAngle(moon_age) / 360.0);
 
-	return {
+	const result: MoonPhaseInfo = {
 		phaseDegrees: confineAngle(moon_age) / 360.0,
 		phaseRadians,
 		moonAgeInMonth,
@@ -152,4 +150,6 @@ export function getPhase(julianDate: number) {
 		sunDistance,
 		sunAngularDiameter,
 	};
+
+	return result;
 }
