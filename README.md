@@ -1,5 +1,5 @@
 <center>
-    <h1><pre align="center">PineappleRind</pre></h1>
+    <h1><pre align="center">jsphoon</pre></h1>
     ASCII Art Phase of the Moon (TypeScript version)
     <small><i>(I call it JSPhoon because it's more recognizable)</i></small>
 </center>
@@ -12,27 +12,34 @@ It's been translated by him into C, then by @igor_chubin into Python, and now by
 
 **I'm basing this one off of the Python version.**
 
-<center><h2><pre align="center">Usage</h2></center>
-I'm aiming for options to be mostly similar to the Python version (usage over here [on pyphoon's readme](https://github.com/chubin/pyphoon/tree/master#usage)).
+<center><h2><pre align="center">Usage</pre></h2></center>
+
+I'm aiming for options to be mostly similar to the Python version usage over here [on pyphoon's readme](https://github.com/chubin/pyphoon/tree/master#usage).
+
 ```
 jsphoon [--lines [LINES]] [--language [LANGUAGE]]
         [--hemisphere [north,south]] [--date [DATE]]
         [--showHemisphereText] [--notext] [--nocolor]
 ```
+
 Note that there is no help command as of v0.1.
 
-<center><h2><pre align="center">Installation</h2></center>
+<center><h2><pre align="center">Installation</pre></h2></center>
 Currently, you'll have to:
+
 ```sh
 git clone https://github.com/PineappleRind/jsphoon
 cd jsphoon
 bun i
 bun src/main.ts
 ```
+
 JSPhoon uses the [Bun runtime](https://bun.sh) for faster installation times and TypeScript support out-of-the-box.
 
-<center><h2><pre align="center">Contributing</h2></center>
+<center><h2><pre align="center">Contributing</pre></h2></center>
+
 <h3>Project Structure</h3>
+
 ```ts
 src/
 ├── calculations/
@@ -46,6 +53,7 @@ src/
 test/
 └── *.test.ts
 ```
+
 Here's what everything does.
 - **`src/calculations/`** contains the main astronomical calculations. <small><i>This was formerly in pyphoon's `astro` module.</small></i>
 - **`src/constants/`** contains some constants to help in various `calculations` and determining `settings`.
@@ -60,4 +68,4 @@ Here's what everything does.
 
 <h3>How can I help?</h3>
 
-Here's some [information on contributing to Open Source in general](https://opensource.guide/how-to-contribute/). A lot of it applies.
+Here's some [information on contributing to Open Source in general](https://opensource.guide/how-to-contribute/). A lot of it applies here.
