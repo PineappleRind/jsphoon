@@ -2,6 +2,12 @@
   "name": "jsphoon",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "format": "bun rome format --write .",
+    "lint": "bun rome check .",
+    "bundle": "bun build --minify src/main.ts",
+    "test": "bun test"
+  },
   "devDependencies": {
     "bun-types": "^0.6.0",
     "rome": "^12.1.3"

@@ -1,14 +1,17 @@
+import { type Phase, correctPhase } from "@/calculations/correctPhase";
+import { meanPhase } from "@/calculations/meanPhase";
 import { SYNODIC_MONTH } from "@/constants/phase";
 import { julianToISO } from "@/utils/date";
-import { meanPhase } from "@/calculations/meanPhase";
-import { Phase, correctPhase } from "@/calculations/correctPhase";
 
 /**
  * PHASEHUNT2  --  Find time of phases of the moon which surround
  * the current date. Two phases are found.
  * @returns { phases: [number, number], which: [number, number] }
  */
-export function find2SurroundingPhases(julianDate: number) {
+export function find2SurroundingPhases(julianDate: number): {
+	phases: [number, number];
+	which: [number, number];
+} {
 	const phases = [0, 0];
 	const which = [0, 0];
 
@@ -36,7 +39,10 @@ export function find2SurroundingPhases(julianDate: number) {
 		}
 	}
 
-	return { phases, which };
+	return {
+		phases: phases as [number, number],
+		which: which as [number, number],
+	};
 }
 
 /**  PHASEHUNT5  --  Find time of phases of the moon which surround

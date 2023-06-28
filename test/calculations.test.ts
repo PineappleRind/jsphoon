@@ -1,11 +1,12 @@
 import { describe, expect, test } from "bun:test";
+
 import { correctPhase } from "@/calculations/correctPhase";
-import { meanPhase } from "@/calculations/meanPhase";
-import { getPhase, kepler } from "@/calculations/phase";
 import {
 	find2SurroundingPhases,
 	find5SurroundingPhases,
 } from "@/calculations/findSurroundingPhase";
+import { meanPhase } from "@/calculations/meanPhase";
+import { getPhase, kepler } from "@/calculations/phase";
 
 describe("Phase helpers", () => {
 	test("Kepler equation", () => {

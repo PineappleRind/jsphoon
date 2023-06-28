@@ -1,5 +1,6 @@
 import { meanPhase } from "@/calculations/meanPhase";
 import { degreeTrigonometry } from "@/utils/math";
+
 const { sin: dsin, cos: dcos } = degreeTrigonometry;
 
 export type Phase = 0.0 | 0.25 | 0.5 | 0.75;
@@ -9,9 +10,8 @@ export type Phase = 0.0 | 0.25 | 0.5 | 0.75;
  * selector (0.0, 0.25, 0.5, 0.75), obtain
  * the true, corrected phase time.
  */
-export function correctPhase(k: number, moonPhase: Phase) {
-	let apcor = false;
-	k += moonPhase;
+export function correctPhase(k$: number, moonPhase: Phase) {
+	const k = k$ + moonPhase;
 	// Time in Julian centuries from 1900 January 0.5
 	const julianTime = k / 1236.85;
 	// Mean time of phase
@@ -35,6 +35,8 @@ export function correctPhase(k: number, moonPhase: Phase) {
 		0.0016528 * julianTime ** 2 -
 		0.00000239 * julianTime ** 3;
 
+	// Keep track of whether we've applied a correction
+	let appliedCorrection = false;
 	// Corrections for New and Full moon
 	if (moonPhase < 0.01 || Math.abs(moonPhase - 0.5) < 0.01) {
 		phaseTime +=
@@ -51,7 +53,7 @@ export function correctPhase(k: number, moonPhase: Phase) {
 			0.0006 * dsin(2 * moonArgumentOfLatitude + moonMeanAnomaly) +
 			0.001 * dsin(2 * moonArgumentOfLatitude - moonMeanAnomaly) +
 			0.0005 * dsin(sunMeanAnomaly + 2 * moonMeanAnomaly);
-		apcor = true;
+		appliedCorrection = true;
 	} else if (
 		Math.abs(moonPhase - 0.25) < 0.01 ||
 		Math.abs(moonPhase - 0.75) < 0.01
@@ -84,9 +86,9 @@ export function correctPhase(k: number, moonPhase: Phase) {
 				0.0004 * dcos(sunMeanAnomaly) -
 				0.0003 * dcos(moonMeanAnomaly);
 		}
-		apcor = true;
+		appliedCorrection = true;
 	}
-	if (!apcor)
+	if (!appliedCorrection)
 		throw new Error(
 			"TRUEPHASE (moon/correctPhase.ts) called with invalid phase selector",
 		);

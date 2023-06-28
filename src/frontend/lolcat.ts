@@ -10,17 +10,17 @@ type RGBColor = {
 };
 
 type Options = {
+	/** Seed of the rainbow, use the same for the same pattern */
 	seed: number;
+	/** Spread of the rainbow */
 	spread: number;
+	/** Frequency of the rainbow colors */
 	frequency: number;
 };
 
 let options: Options = {
-	// Seed of the rainbow, use the same for the same pattern
 	seed: 0,
-	// Spread of the rainbow
 	spread: 8.0,
-	// Frequency of the rainbow colors
 	frequency: 0.05,
 };
 
@@ -58,7 +58,7 @@ export function lolcat(text: string, overrideOptions?: Partial<Options>) {
 
 	const lines = text.split("\n");
 
-	for (let line in lines) {
+	for (const line in lines) {
 		options.seed += 1;
 		printColorizedLine(lines[line]);
 	}

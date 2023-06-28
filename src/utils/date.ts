@@ -14,8 +14,8 @@ export function julianToISO(epoch: number) {
 		Return (yy, mm, dd)
 	*/
 	const { floor } = Math;
-	epoch += 0.5; // Astronomical to civil
-	let julian = floor(epoch);
+	const civilEpoch = epoch + 0.5; // Astronomical to civil
+	let julian = floor(civilEpoch);
 	julian -= 1721119.0;
 	let year = floor((4 * julian - 1) / 146097.0);
 	julian = julian * 4.0 - (1.0 + 146097.0 * year);
@@ -40,13 +40,18 @@ export function julianToISO(epoch: number) {
  * may be a better way to do this with new Date()
  */
 export function createDateString(secs: number) {
-	const days = Math.trunc(secs / SECONDS_IN_DAY);
-	secs = Math.trunc(secs - days * SECONDS_IN_DAY);
-	const hours = Math.trunc(secs / SECONDS_IN_HOUR);
-	secs = Math.trunc(secs - hours * SECONDS_IN_HOUR);
-	const minutes = Math.trunc(secs / SECONDS_IN_MINUTE);
-	secs = Math.trunc(secs - minutes * SECONDS_IN_MINUTE);
+	// because of rome lint
+	let seconds = secs;
+	const days = Math.trunc(seconds / SECONDS_IN_DAY);
+	// Subtract days from seconds, leaving us with hours, minutes, and seconds
+	seconds = Math.trunc(seconds - days * SECONDS_IN_DAY);
+	const hours = Math.trunc(seconds / SECONDS_IN_HOUR);
+	// Subtract hours from seconds, leaving us with minutes and seconds
+	seconds = Math.trunc(seconds - hours * SECONDS_IN_HOUR);
+	const minutes = Math.trunc(seconds / SECONDS_IN_MINUTE);
+	// Subract minutes from seconds, leaving us with seconds
+	seconds = Math.trunc(seconds - minutes * SECONDS_IN_MINUTE);
 
 	const padNumber = (x: number) => x.toString().padStart(2, "0");
-	return `${days} ${hours}:${padNumber(minutes)}:${padNumber(secs)}`;
+	return `${days} ${hours}:${padNumber(minutes)}:${padNumber(seconds)}`;
 }

@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
+
 import { createDateString, julianToISO, unixToJulian } from "@/utils/date";
-import { confineAngle, angle as angleConversion } from "@/utils/math";
+import { angle as angleConversion, confineAngle } from "@/utils/math";
 
 describe("Math utils", () => {
 	test("Confine angle", () => {

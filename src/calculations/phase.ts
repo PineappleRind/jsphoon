@@ -1,20 +1,20 @@
-import { angle as convertAngle, confineAngle } from "@/utils/math";
 import {
-	SUN_ANGULAR_SIZE,
-	MOON_ANGULAR_SIZE,
-	EARTH_ORBIT_AXIS,
-	MOON_SEMIMAJOR_AXIS,
 	EARTH_ECCENTRICITY,
+	EARTH_ORBIT_AXIS,
 	EPOCH,
-	SUN_ECLIPTIC_LONGITUDE_EPOCH,
+	MOON_ANGULAR_SIZE,
 	MOON_ECCENTRICITY,
-	SUN_ECLIPTIC_LONGITUDE_PERIGEE,
 	MOON_INCLINATION,
-	MOON_MEAN_LONGITUDE_PERIGEE,
-	MOON_MEAN_LONGITUDE,
 	MOON_LONGITUDE_NODE,
+	MOON_MEAN_LONGITUDE,
+	MOON_MEAN_LONGITUDE_PERIGEE,
+	MOON_SEMIMAJOR_AXIS,
+	SUN_ANGULAR_SIZE,
+	SUN_ECLIPTIC_LONGITUDE_EPOCH,
+	SUN_ECLIPTIC_LONGITUDE_PERIGEE,
 	SYNODIC_MONTH,
 } from "@/constants/phase";
+import { angle as convertAngle, confineAngle } from "@/utils/math";
 
 const { radians, degrees } = convertAngle;
 
@@ -42,19 +42,18 @@ export function kepler(angle: number, ecc: number) {
 	return theta;
 }
 
-export function getPhase(julianDate: number) {
-	/**  PHASE  --  Calculate phase of moon as a fraction:
+/**  PHASE  --  Calculate phase of moon as a fraction:
 
-		 The argument is the time for which the phase is requested,
-		 expressed as a Julian date and fraction.  Returns the terminator
-		 phase angle as a percentage of a full circle (i.e., 0 to 1),
-		 and stores into pointer arguments the illuminated fraction of
-		 the Moon's disc, the Moon's age in days and fraction, the
-		 distance of the Moon from the centre of the Earth, and the
-		 angular diameter subtended by the Moon as seen by an observer
-		 at the centre of the Earth.
-	**/
-
+	 The argument is the time for which the phase is requested,
+	 expressed as a Julian date and fraction.  Returns the terminator
+	 phase angle as a percentage of a full circle (i.e., 0 to 1),
+	 and stores into pointer arguments the illuminated fraction of
+	 the Moon's disc, the Moon's age in days and fraction, the
+	 distance of the Moon from the centre of the Earth, and the
+	 angular diameter subtended by the Moon as seen by an observer
+	 at the centre of the Earth.
+**/
+export function getPhase(julianDate: number): MoonPhaseInfo {
 	// Calculation of the Sun's position
 
 	const day = julianDate - EPOCH; // Date within epoch

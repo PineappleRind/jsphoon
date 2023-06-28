@@ -2,10 +2,10 @@ import { find2SurroundingPhases } from "@/calculations/findSurroundingPhase";
 import { getPhase } from "@/calculations/phase";
 import { ASPECT_RATIO, SECONDS_IN_DAY } from "@/constants/settings";
 import { type Language, translations } from "@/frontend/ii8n";
+import { lolcat } from "@/frontend/lolcat";
 import { type Settings } from "@/frontend/settings";
-import { createDateString, unixToJulian } from "@/utils/date";
 import moons from "@/moons";
-import { lolcat } from "./frontend/lolcat";
+import { createDateString, unixToJulian } from "@/utils/date";
 
 export function printMoon(settings: Settings) {
 	const julianDate = unixToJulian(settings.date);
@@ -83,23 +83,23 @@ function getLineOfMoon(
 		const translation = findTranslation(settings.language);
 		// Output the end-of-line information, if any
 		line += "\t ";
-		if (lineNumber == centerLine - 2) {
+		if (lineNumber === centerLine - 2) {
 			// Now hopefully the object is in order.. 😅
-			let qlits = Object.values(translation).map((text) => text + " +");
+			const qlits = Object.values(translation).map((text) => `${text} +`);
 			line += qlits[Math.trunc(which[0] * 4)];
-		} else if (lineNumber == centerLine - 1) {
+		} else if (lineNumber === centerLine - 1) {
 			line += createDateString(
 				Math.trunc((julianDate - phases[0]) * SECONDS_IN_DAY),
 			);
-		} else if (lineNumber == centerLine) {
-			let nqlits = Object.values(translation).map((text) => text + " -");
+		} else if (lineNumber === centerLine) {
+			const nqlits = Object.values(translation).map((text) => `${text} -`);
 			line += nqlits[Math.trunc(which[1] * 4)];
-		} else if (lineNumber == centerLine + 1) {
+		} else if (lineNumber === centerLine + 1) {
 			line += createDateString(
 				Math.trunc((phases[1] - julianDate) * SECONDS_IN_DAY),
 			);
-		} else if (lineNumber == centerLine + 2 && settings.showHemisphereText) {
-			let msg =
+		} else if (lineNumber === centerLine + 2 && settings.showHemisphereText) {
+			const msg =
 				settings.hemisphere === "north"
 					? translation.northernHemisphere
 					: translation.southernHemisphere;
@@ -110,7 +110,7 @@ function getLineOfMoon(
 }
 
 function findTranslation(language: Language) {
-	let translation = translations[language] || translations.en;
+	const translation = translations[language] || translations.en;
 	if (Object.keys(translation).length < 6) {
 		translation.northernHemisphere = translations.en.northernHemisphere;
 		translation.southernHemisphere = translations.en.southernHemisphere;

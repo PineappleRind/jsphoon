@@ -1,12 +1,12 @@
 import {
 	DEFAULT_HEMISPHERE,
 	DEFAULT_LANGUAGE,
-	DEFAULT_NO_TEXT,
 	DEFAULT_NO_COLOR,
+	DEFAULT_NO_TEXT,
 	DEFAULT_SHOW_HEMISPHERE_TEXT,
 	DEFAULT_SIZE_LINES,
 } from "@/constants/settings";
-import { translations, Language } from "@/frontend/ii8n";
+import { Language, translations } from "@/frontend/ii8n";
 
 export type Settings = {
 	/** UNIX Timestamp */
@@ -49,7 +49,7 @@ export function getSettings(args: {
 			? args.showHemisphereText
 			: DEFAULT_SHOW_HEMISPHERE_TEXT;
 	// Date
-	let stringDate = args.date?.toString() || "";
+	const stringDate = args.date?.toString() || "";
 	const tryDate = new Date(
 		!isNaN(parseInt(stringDate)) ? parseInt(stringDate) : stringDate,
 	);
