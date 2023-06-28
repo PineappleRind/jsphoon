@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { julianToISO, unixToJulian } from "@/utils/date";
+import { createDateString, julianToISO, unixToJulian } from "@/utils/date";
 import { confineAngle, angle as angleConversion } from "@/utils/math";
 
 describe("Math utils", () => {
@@ -24,5 +24,10 @@ describe("Date utils", () => {
 
 	test("Convert Julian date to ISO date", () => {
 		expect(julianToISO(2434121.446111)).toEqual([1952, 4, 18]);
+	});
+
+	test('Create date string from "secs"', () => {
+		expect(createDateString(201221)).toBe("2 7:53:41");
+		expect(createDateString(2710)).toBe("0 0:45:10");
 	});
 });

@@ -3,31 +3,38 @@ import { julianToISO } from "@/utils/date";
 import { meanPhase } from "@/calculations/meanPhase";
 import { Phase, correctPhase } from "@/calculations/correctPhase";
 
+/**
+ * PHASEHUNT2  --  Find time of phases of the moon which surround
+ * the current date. Two phases are found.
+ * @returns { phases: [number, number], which: [number, number] }
+ */
 export function find2SurroundingPhases(julianDate: number) {
-	/**PHASEHUNT2  --  Find time of phases of the moon which surround
-	the current date.  Two phases are found.
-   Return phases[2], which[2]
-   */
-	let phases = [0, 0];
-	let which = [0, 0];
+	const phases = [0, 0];
+	const which = [0, 0];
 
-	let phases5 = find5SurroundingPhases(julianDate);
+	const phases5 = find5SurroundingPhases(julianDate);
 	phases[0] = phases5[0];
 	which[0] = 0.0;
 	phases[1] = phases5[1];
 	which[1] = 0.25;
-	if (phases[1] <= julianDate) phases[0] = phases[1];
-	which[0] = which[1];
-	phases[1] = phases5[2];
-	which[1] = 0.5;
-	if (phases[1] <= julianDate) phases[0] = phases[1];
-	which[0] = which[1];
-	phases[1] = phases5[3];
-	which[1] = 0.75;
-	if (phases[1] <= julianDate) phases[0] = phases[1];
-	which[0] = which[1];
-	phases[1] = phases5[4];
-	which[1] = 0.0;
+	if (phases[1] <= julianDate) {
+		phases[0] = phases[1];
+		which[0] = which[1];
+		phases[1] = phases5[2];
+		which[1] = 0.5;
+		if (phases[1] <= julianDate) {
+			phases[0] = phases[1];
+			which[0] = which[1];
+			phases[1] = phases5[3];
+			which[1] = 0.75;
+			if (phases[1] <= julianDate) {
+				phases[0] = phases[1];
+				which[0] = which[1];
+				phases[1] = phases5[4];
+				which[1] = 0.0;
+			}
+		}
+	}
 
 	return { phases, which };
 }
@@ -44,9 +51,9 @@ export function find5SurroundingPhases(julianDate: number) {
 	const [year, month, _] = julianToISO(adate);
 	// this was called var1???
 	let unnamedVariable = Math.floor(
-			(year + (month - 1) * (1.0 / 12.0) - 1900) * 12.3685,
-		),
-		anotherUnnamedVariable: number;
+		(year + (month - 1) * (1.0 / 12.0) - 1900) * 12.3685,
+	);
+	let anotherUnnamedVariable: number;
 	let new_time = meanPhase(adate, unnamedVariable);
 	adate = new_time;
 	while (true) {

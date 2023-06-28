@@ -2,17 +2,19 @@ import {
 	DEFAULT_HEMISPHERE,
 	DEFAULT_LANGUAGE,
 	DEFAULT_NO_TEXT,
+	DEFAULT_NO_COLOR,
 	DEFAULT_SHOW_HEMISPHERE_TEXT,
 	DEFAULT_SIZE_LINES,
 } from "@/constants/settings";
-import { LOCALIZATION } from "@/frontend/ii8n";
+import { translations, Language } from "@/frontend/ii8n";
 
 export type Settings = {
 	/** UNIX Timestamp */
 	date: number;
 	lines: number;
 	noText: boolean;
-	language: string;
+	noColor: boolean;
+	language: Language;
 	hemisphere: "north" | "south";
 	includeHemisphereText: boolean;
 };
@@ -20,14 +22,20 @@ export type Settings = {
 export function getSettings(args: {
 	[arg: string]: boolean | string | number | undefined;
 }) {
-	let settings: Settings = {} as Settings;
+	const settings: Settings = {} as Settings;
+	// Resolution
 	settings.lines =
 		typeof args.lines === "number" ? args.lines : DEFAULT_SIZE_LINES;
+	// Don't print text
 	settings.noText =
 		typeof args.noText === "boolean" ? args.noText : DEFAULT_NO_TEXT;
+	// Don't print colors
+	settings.noColor =
+		typeof args.noColor === "boolean" ? args.noColor : DEFAULT_NO_COLOR;
+	// Language
 	settings.language =
-		typeof args.language === "string" && args.language in LOCALIZATION
-			? args.language
+		typeof args.language === "string" && args.language in translations
+			? (args.language as Language)
 			: DEFAULT_LANGUAGE;
 	// Hemisphere
 	settings.hemisphere = ["north", "south"].includes(
@@ -41,10 +49,12 @@ export function getSettings(args: {
 			? args.includeHemisphereText
 			: DEFAULT_SHOW_HEMISPHERE_TEXT;
 	// Date
-	let tryDate = new Date(parseInt(args.date?.toString() || ""));
+	const tryDate = new Date(
+		typeof args.date === "number" ? args.date : args.date?.toString() || "",
+	);
 	settings.date =
 		tryDate.toString() === "Invalid Date"
 			? Date.now() / 1000
-			: tryDate.getTime();
+			: tryDate.getTime() / 1000;
 	return settings;
 }

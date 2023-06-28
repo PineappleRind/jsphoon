@@ -51,6 +51,13 @@ describe("Phase calculations", () => {
 		expect(phases[1]).toBeCloseTo(2306230.580827616);
 		expect(which[0]).toBe(0.75);
 		expect(which[1]).toBe(0);
+
+		const { phases: phases2, which: which2 } =
+			find2SurroundingPhases(2460124.2275343887);
+		expect(phases2[0]).toBeCloseTo(2460121.827303696);
+		expect(phases2[1]).toBeCloseTo(2460128.9864678993);
+		expect(which2[0]).toBe(0.25);
+		expect(which2[1]).toBe(0.5);
 	});
 
 	test("Find 5 surrounding phases", () => {
@@ -60,5 +67,12 @@ describe("Phase calculations", () => {
 		expect(c).toBeCloseTo(2462107.570612963);
 		expect(d).toBeCloseTo(2462114.7360729612);
 		expect(e).toBeCloseTo(2462121.5884754225);
+		//2460113.693867649, 2460121.827303696, 2460128.9864678993, 2460135.575783955, 2460143.2729884232
+		const [a2, b2, c2, d2, e2] = find5SurroundingPhases(2460124.2275343887);
+		expect(a2).toBeCloseTo(2460113.693867649);
+		expect(b2).toBeCloseTo(2460121.827303696);
+		expect(c2).toBeCloseTo(2460128.9864678993);
+		expect(d2).toBeCloseTo(2460135.575783955);
+		expect(e2).toBeCloseTo(2460143.2729884232);
 	});
 });

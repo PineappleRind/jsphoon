@@ -1,0 +1,302 @@
+/**
+ * Pretty much ripped from pyphoon:
+ * https://github.com/chubin/pyphoon/blob/master/pyphoon/lib/translations.py
+ */
+{
+	"en": {
+		"newMoon": "New Moon",
+		"firstQuarter": "First Quarter",
+		"fullMoon": "Full Moon",
+		"lastQuarter": "Last Quarter",
+		"northernHemisphere": "Northern Hemisphere",
+		"southernHemisphere": "Southern Hemisphere"
+	},
+	"be": {
+		"newMoon": "Маладзік",
+		"firstQuarter": "Першая чвэрць",
+		"fullMoon": "Поўня",
+		"lastQuarter": "Апошняя чвэрць",
+		"northernHemisphere": "Паўночнае паўшар’е",
+		"southernHemisphere": "Паўднёвае паўшар’е"
+	},
+	"bg": {
+		"newMoon": "Новолуние",
+		"firstQuarter": "Първа четвърт",
+		"fullMoon": "Пълнолуние",
+		"lastQuarter": "Последна четвърт",
+		"northernHemisphere": "Северно полукълбо",
+		"southernHemisphere": "Южно полукълбо"
+	},
+	"ca": {
+		"newMoon": "Noviluni",
+		"firstQuarter": "Quart creixent",
+		"fullMoon": "Pleniluni",
+		"lastQuarter": "Lluna minvant",
+		"northernHemisphere": "Hemisferi nord",
+		"southernHemisphere": "Hemisferi sud"
+	},
+	"cs": {
+		"newMoon": "Nov",
+		"firstQuarter": "První čtvrť",
+		"fullMoon": "Úplněk",
+		"lastQuarter": "Poslední čtvrť",
+		"northernHemisphere": "Severní polokoule",
+		"southernHemisphere": "Jižní polokoule"
+	},
+	"da": {
+		"newMoon": "Nymåne",
+		"firstQuarter": "Tiltagende",
+		"fullMoon": "Fuldmåne",
+		"lastQuarter": "Aftagende",
+		"northernHemisphere": "Nordlige halvkugle",
+		"southernHemisphere": "Sydlige halvkugle"
+	},
+	"de": {
+		"newMoon": "Neumond",
+		"firstQuarter": "Erstes Viertel",
+		"fullMoon": "Vollmond",
+		"lastQuarter": "Letztes Viertel",
+		"northernHemisphere": "Nordhalbkugel",
+		"southernHemisphere": "Südhalbkugel"
+	},
+	"et": {
+		"newMoon": "Noorkuu",
+		"firstQuarter": "Esimene veerand",
+		"fullMoon": "Täiskuu",
+		"lastQuarter": "Viimane veerand",
+		"northernHemisphere": "Põhjapoolkera",
+		"southernHemisphere": "Lõunapoolkera"
+	},
+	"el": {
+		"newMoon": "Νέα Σελήνη",
+		"firstQuarter": "Πρώτο τέταρτο",
+		"fullMoon": "Πανσέληνος",
+		"lastQuarter": "Τελευταίο τέταρτο",
+		"northernHemisphere": "Βόρειο ημισφαίριο",
+		"southernHemisphere": "Νότιο ημισφαίριο"
+	},
+	"es": {
+		"newMoon": "Luna nueva",
+		"firstQuarter": "Cuarto creciente",
+		"fullMoon": "Luna Llena",
+		"lastQuarter": "Cuarto menguante",
+		"northernHemisphere": "Hemisferio norte",
+		"southernHemisphere": "Hemisferio sur"
+	},
+	"eo": {
+		"newMoon": "Novluno",
+		"firstQuarter": "Unua lunduono",
+		"fullMoon": "Plenluno",
+		"lastQuarter": "Lasta lunduono",
+		"northernHemisphere": "Norda duonglobo",
+		"southernHemisphere": "Suda duonglobo"
+	},
+	"fi": {
+		"newMoon": "Uusikuu",
+		"firstQuarter": "Kasvava puolikuu",
+		"fullMoon": "Täysikuu",
+		"lastQuarter": "Laskeva puolikuu",
+		"northernHemisphere": "Pohjoinen pallonpuolisko",
+		"southernHemisphere": "Eteläinen pallonpuolisko"
+	},
+	"fr": {
+		"newMoon": "Nouvelle lune",
+		"firstQuarter": "Premier quartier",
+		"fullMoon": "Pleine lune",
+		"lastQuarter": "Dernier quartier",
+		"northernHemisphere": "Hémisphère nord",
+		"southernHemisphere": "Hémisphère sud"
+	},
+	"hr": {
+		"newMoon": "Mlađak",
+		"firstQuarter": "Prva četvrt",
+		"fullMoon": "Uštap",
+		"lastQuarter": "Zadnja četvrt",
+		"northernHemisphere": "Sjeverna polutka",
+		"southernHemisphere": "Južna polutka"
+	},
+	"hy": {
+		"newMoon": "Նորալուսին",
+		"firstQuarter": "Առաջին քառորդ",
+		"fullMoon": "Լիալուսին",
+		"lastQuarter": "Վերջին քառորդ",
+		"northernHemisphere": "Հյուսիսային կիսագունդ",
+		"southernHemisphere": "Հարավային կիսագունդ"
+	},
+	"ia": {
+		"newMoon": "Nove lunio",
+		"firstQuarter": "Primo quarte",
+		"fullMoon": "Plenilunio",
+		"lastQuarter": "Ultime quarte",
+		"northernHemisphere": "Hemispherio del nord",
+		"southernHemisphere": "Hemispherio del sud"
+	},
+	"it": {
+		"newMoon": "Luna nuova",
+		"firstQuarter": "Primo quarto",
+		"fullMoon": "Luna piena",
+		"lastQuarter": "Ultimo quarto",
+		"northernHemisphere": "Emisfero boreale",
+		"southernHemisphere": "Emisfero australe"
+	},
+	"ja": {
+		"newMoon": "新月",
+		"firstQuarter": "上弦",
+		"fullMoon": "満月",
+		"lastQuarter": "下弦",
+		"northernHemisphere": "北半球",
+		"southernHemisphere": "南半球"
+	},
+	"lt": {
+		"newMoon": "Jaunatis",
+		"firstQuarter": "Priešpilnis",
+		"fullMoon": "Pilnatis",
+		"lastQuarter": "Delčia",
+		"northernHemisphere": "Šiaurės pusrutulis",
+		"southernHemisphere": "Pietų pusrutulis"
+	},
+	"nl": {
+		"newMoon": "Nieuwe maan",
+		"firstQuarter": "Eerste kwartier",
+		"fullMoon": "Volle maan",
+		"lastQuarter": "Laatste kwartier",
+		"northernHemisphere": "Noordelijk halfrond",
+		"southernHemisphere": "Zuidelijk halfrond"
+	},
+	"ru": {
+		"newMoon": "Новолуние",
+		"firstQuarter": "Первая четверть",
+		"fullMoon": "Полнолуние",
+		"lastQuarter": "Последняя четверть",
+		"northernHemisphere": "Северное полушарие",
+		"southernHemisphere": "Южное полушарие"
+	},
+	"pl": {
+		"newMoon": "Nów",
+		"firstQuarter": "Pierwsza kwadra",
+		"fullMoon": "Pełnia",
+		"lastQuarter": "Ostatnia kwadra",
+		"northernHemisphere": "Półkula północna",
+		"southernHemisphere": "Półkula południowa"
+	},
+	"pt": {
+		"newMoon": "Lua nova",
+		"firstQuarter": "Quarto crescente",
+		"fullMoon": "Lua cheia",
+		"lastQuarter": "Quarto minguante",
+		"northernHemisphere": "Hemisfério Norte",
+		"southernHemisphere": "Hemisfério Sul"
+	},
+	"ro": {
+		"newMoon": "Lună nouă",
+		"firstQuarter": "Primul pătrar",
+		"fullMoon": "Lună plină",
+		"lastQuarter": "Ultimul pătrar",
+		"northernHemisphere": "Emisfera nordică",
+		"southernHemisphere": "Emisfera sudică"
+	},
+	"sk": {
+		"newMoon": "Nov",
+		"firstQuarter": "Prvá štvrť",
+		"fullMoon": "Úplnok",
+		"lastQuarter": "Posledná štvrť",
+		"northernHemisphere": "Severná pologuľa",
+		"southernHemisphere": "Južná pologuľa"
+	},
+	"sr": {
+		"newMoon": "Mlađak",
+		"firstQuarter": "Prva četvrt",
+		"fullMoon": "Uštap",
+		"lastQuarter": "Poslednja četvrt",
+		"northernHemisphere": "Северна хемисфера",
+		"southernHemisphere": "Јужна хемисфера"
+	},
+	"sv": {
+		"newMoon": "Nymåne",
+		"firstQuarter": "Tilltagande",
+		"fullMoon": "Fullmåne",
+		"lastQuarter": "Avtagande",
+		"northernHemisphere": "Norra halvklotet",
+		"southernHemisphere": "Södra halvklotet"
+	},
+	"uk": {
+		"newMoon": "Молодик",
+		"firstQuarter": "Перша чверть",
+		"fullMoon": "Повня",
+		"lastQuarter": "Остання чверть",
+		"northernHemisphere": "Північна півкуля",
+		"southernHemisphere": "Південна півкуля"
+	},
+	"th": {
+		"newMoon": "เดือนมืด",
+		"firstQuarter": "ข้างขึ้น",
+		"fullMoon": "วันเพ็ญ",
+		"lastQuarter": "ข้างแรม",
+		"northernHemisphere": "ซีกโลกเหนือ",
+		"southernHemisphere": "ซีกโลกใต้"
+	},
+	"ko": {
+		"newMoon": "초승달",
+		"firstQuarter": "상현달",
+		"fullMoon": "보름달",
+		"lastQuarter": "하현달",
+		"northernHemisphere": "북반구",
+		"southernHemisphere": "남반구"
+	},
+	"kn": {
+		"newMoon": "ಅಮಾವಾಸ್ಯೆ",
+		"firstQuarter": "ಕೃಷ್ಣಪಕ್ಷ, ಅಷ್ಟಮಿ ",
+		"fullMoon": "ಹುಣ್ಣಿಮೆ",
+		"lastQuarter": "ಶುಕ್ಲಪಕ್ಷ, ಅಷ್ಟಮಿ",
+		"northernHemisphere": "ಉತ್ತರ ಗೋಲಾರ್ಧ",
+		"southernHemisphere": "ದಕ್ಷಿಣ ಗೋಳಾರ್ಧ"
+	},
+	"zh_TW": {
+		"newMoon": "新月",
+		"firstQuarter": "上弦",
+		"fullMoon": "滿月",
+		"lastQuarter": "下弦",
+		"northernHemisphere": "北半球",
+		"southernHemisphere": "南半球"
+	},
+	"ar": {
+		"newMoon": "المحاق",
+		"firstQuarter": "الربع الأول",
+		"fullMoon": "البدر",
+		"lastQuarter": "الربع الأخير",
+		"northernHemisphere": "نصف الأرض الشمالي",
+		"southernHemisphere": "نصف الأرض الجنوبي"
+	},
+	"nb": {
+		"newMoon": "Nymåne",
+		"firstQuarter": "Første kvarter",
+		"fullMoon": "Fullmåne",
+		"lastQuarter": "Siste kvarter",
+		"northernHemisphere": "Den nordlege halvkula",
+		"southernHemisphere": "Den sørlege halvkula"
+	},
+	"nn": {
+		"newMoon": "Nymåne",
+		"firstQuarter": "Første kvarter",
+		"fullMoon": "Fullmåne",
+		"lastQuarter": "Siste kvarter",
+		"northernHemisphere": "Den nordlege halvkula",
+		"southernHemisphere": "Den sørlege halvkula"
+	},
+	"cy": {
+		"newMoon": "Lleuad Newydd",
+		"firstQuarter": "Chwarter Cyntaf",
+		"fullMoon": "Lleuad Llawn",
+		"lastQuarter": "Chwarter Olaf",
+		"northernHemisphere": "Hemisffer y Gogledd",
+		"southernHemisphere": "Hemisffer y De"
+	},
+	"tr": {
+		"newMoon": "Yeni Ay",
+		"firstQuarter": "İlk Dördün",
+		"fullMoon": "Dolunay",
+		"lastQuarter": "Son Dördün",
+		"northernHemisphere": "Kuzey yarımküre",
+		"southernHemisphere": "Güney yarımküre"
+	}
+}
