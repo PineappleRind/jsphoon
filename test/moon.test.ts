@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { truePhase } from "../src/calculations/truePhase";
-import { meanPhase } from "../src/calculations/meanPhase";
+import { truePhase } from "@/calculations/truePhase";
+import { meanPhase } from "@/calculations/meanPhase";
 
 describe("Phase calculations", () => {
 	test("True phase", () => {

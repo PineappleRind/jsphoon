@@ -1,9 +1,9 @@
 import process from "process";
 import parse from "args-parser";
 
-import { getSettings } from "./frontend/settings";
-import { getMoon } from "./calculations/getMoon";
+import { getSettings } from "@/frontend/settings";
+import { printMoon } from "@/printMoon";
 
 const args = parse(process.argv);
 const settings = getSettings(args as any);
-getMoon(settings);
+printMoon(settings);

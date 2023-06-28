@@ -1,5 +1,5 @@
-import { SYNODIC_MONTH } from "../constants/phase";
-import { angle } from "../utils/math";
+import { SYNODIC_MONTH } from "@/constants/phase";
+import { angle } from "@/utils/math";
 
 /**
  * Calculates the time of the mean new moon for a given base date.

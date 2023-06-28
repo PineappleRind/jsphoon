@@ -4,8 +4,8 @@ import {
 	DEFAULT_NO_TEXT,
 	DEFAULT_SHOW_HEMISPHERE_TEXT,
 	DEFAULT_SIZE_LINES,
-} from "../constants/settings";
-import { LOCALIZATION } from "./ii8n";
+} from "@/constants/settings";
+import { LOCALIZATION } from "@/frontend/ii8n";
 
 export type Settings = {
 	/** UNIX Timestamp */

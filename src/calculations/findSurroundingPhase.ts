@@ -1,11 +1,11 @@
-import { SYNODIC_MONTH } from "../constants/phase";
-import { julianToISO } from "../utils/date";
-import { meanPhase } from "./meanPhase";
-import { Phase, truePhase } from "./truePhase";
+import { SYNODIC_MONTH } from "@/constants/phase";
+import { julianToISO } from "@/utils/date";
+import { meanPhase } from "@/calculations/meanPhase";
+import { Phase, truePhase } from "@/calculations/truePhase";
 
 export function find2SurroundingPhases(julianDate: number) {
 	/**PHASEHUNT2  --  Find time of phases of the moon which surround
-    the current date.  Two phases are found.
+	the current date.  Two phases are found.
    Return phases[2], which[2]
    */
 	let phases = [0, 0];
@@ -33,10 +33,10 @@ export function find2SurroundingPhases(julianDate: number) {
 }
 
 /**  PHASEHUNT5  --  Find time of phases of the moon which surround
-     the current date.  Five phases are found, starting
-     and ending with the new moons which bound the
-     current lunation.
-    Return phases (double[5])
+	 the current date.  Five phases are found, starting
+	 and ending with the new moons which bound the
+	 current lunation.
+	Return phases (double[5])
 */
 export function find5SurroundingPhases(julianDate: number) {
 	let adate = julianDate - 45;
@@ -44,8 +44,8 @@ export function find5SurroundingPhases(julianDate: number) {
 	const [year, month, _] = julianToISO(adate);
 	// this was called var1???
 	let unnamedVariable = Math.floor(
-			(year + (month - 1) * (1.0 / 12.0) - 1900) * 12.3685,
-		),
+		(year + (month - 1) * (1.0 / 12.0) - 1900) * 12.3685,
+	),
 		anotherUnnamedVariable: number;
 	let new_time = meanPhase(adate, unnamedVariable);
 	adate = new_time;

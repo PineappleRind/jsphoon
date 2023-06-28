@@ -1,11 +1,11 @@
-import { ASPECT_RATIO } from "../constants/settings";
-import { find2SurroundingPhases } from "./findSurroundingPhase";
-import { unixToJulian } from "../utils/date";
-import { getPhase } from "../utils/phase";
-import { type Settings } from "../frontend/settings";
-import moons from "../moon";
+import { ASPECT_RATIO } from "@/constants/settings";
+import { find2SurroundingPhases } from "@/calculations/findSurroundingPhase";
+import { unixToJulian } from "@/utils/date";
+import { getPhase } from "@/utils/phase";
+import { type Settings } from "@/frontend/settings";
+import moons from "@/moon";
 
-export function getMoon(settings: Settings) {
+export function printMoon(settings: Settings) {
 	const julianDate = unixToJulian(settings.date);
 	let { phaseRadians } = getPhase(julianDate);
 	// Fix waxing/waning direction for south hemisphere

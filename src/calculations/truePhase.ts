@@ -1,5 +1,5 @@
-import { meanPhase } from "./meanPhase";
-import { degreeTrigonometry } from "../utils/math";
+import { meanPhase } from "@/calculations/meanPhase";
+import { degreeTrigonometry } from "@/utils/math";
 const { sin: dsin, cos: dcos } = degreeTrigonometry;
 
 export type Phase = 0.0 | 0.25 | 0.5 | 0.75;

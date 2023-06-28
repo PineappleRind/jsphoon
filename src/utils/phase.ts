@@ -1,4 +1,4 @@
-import { angle as convertAngle, confineAngle } from "./math";
+import { angle as convertAngle, confineAngle } from "@/utils/math";
 import {
 	SUN_ANGULAR_SIZE,
 	MOON_ANGULAR_SIZE,
@@ -16,7 +16,7 @@ import {
 	MOON_LONGITUDE_NODE,
 	SYNODIC_MONTH,
 	MOON_PARALLAX,
-} from "../constants/phase";
+} from "@/constants/phase";
 
 const { radians, degrees } = convertAngle;
 
@@ -63,8 +63,8 @@ export function getPhase(julianDate: number) {
 	const sunMeanAnomaly = confineAngle((360 / 365.2422) * day); //Mean anomaly of the Sun
 	const epoch = confineAngle(
 		sunMeanAnomaly +
-			SUN_ECLIPTIC_LONGITUDE_EPOCH -
-			SUN_ECLIPTIC_LONGITUDE_PERIGEE,
+		SUN_ECLIPTIC_LONGITUDE_EPOCH -
+		SUN_ECLIPTIC_LONGITUDE_PERIGEE,
 	); // Convert from perigee
 
 	let eccentricity = kepler(epoch, EARTH_ECCENTRICITY); // Solve equation of Kepler
@@ -134,7 +134,7 @@ export function getPhase(julianDate: number) {
 		(MOON_SEMIMAJOR_AXIS * (1 - MOON_ECCENTRICITY * MOON_ECCENTRICITY)) /
 		(1 +
 			MOON_ECCENTRICITY *
-				Math.cos(radians(moon_anom_correct + centre_eq_correct)));
+			Math.cos(radians(moon_anom_correct + centre_eq_correct)));
 
 	const angularDiameterFraction = distance / MOON_SEMIMAJOR_AXIS; // Calculate Moon's angular diameter
 	// Moon's angular diameter in degrees
