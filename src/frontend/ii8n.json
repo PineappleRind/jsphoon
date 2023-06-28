@@ -1,7 +1,3 @@
-/**
- * Pretty much ripped from pyphoon:
- * https://github.com/chubin/pyphoon/blob/master/pyphoon/lib/translations.py
- */
 {
 	"en": {
 		"newMoon": "New Moon",

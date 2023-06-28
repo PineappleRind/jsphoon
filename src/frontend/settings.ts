@@ -24,8 +24,9 @@ export function getSettings(args: {
 }) {
 	const settings: Settings = {} as Settings;
 	// Resolution
-	settings.lines =
-		typeof args.lines === "number" ? args.lines : DEFAULT_SIZE_LINES;
+	settings.lines = !isNaN(parseInt(args.lines?.toString() || ""))
+		? parseInt(args.lines?.toString() as string)
+		: DEFAULT_SIZE_LINES;
 	// Don't print text
 	settings.noText =
 		typeof args.noText === "boolean" ? args.noText : DEFAULT_NO_TEXT;

@@ -68,13 +68,23 @@ function getLineOfMoon(
 	}
 	while (charNumber <= rightColumn) {
 		// The correct moon to use at this resolution
-		const rightMoon = moons[settings.lines]?.split("\n") || null;
+		console.log(Object.keys(moons), settings.lines);
+		const rightMoon =
+			moons[settings.lines.toString() as keyof typeof moons]?.split("\n") ||
+			null;
+		if (!rightMoon[lineNumber]) {
+			charNumber++;
+			continue;
+		}
 		if (settings.hemisphere === "north")
 			// Read moons from upper left to bottom right
-			char = rightMoon ? rightMoon[lineNumber][charNumber] : "@";
+			char = rightMoon ? rightMoon[lineNumber][charNumber] || " " : "@";
 		// read moons from bottom right to upper left
 		// equivalent of rotating 180 degrees (or flipping upside down)
-		else char = rightMoon ? rightMoon[-1 - lineNumber][-charNumber] : "@";
+		else
+			char = rightMoon
+				? rightMoon.at(-1 - lineNumber)?.at(-charNumber) || " "
+				: "@";
 		charNumber++;
 		line += char;
 	}
