@@ -16,7 +16,7 @@ export type Settings = {
 	noColor: boolean;
 	language: Language;
 	hemisphere: "north" | "south";
-	includeHemisphereText: boolean;
+	showHemisphereText: boolean;
 };
 
 export function getSettings(args: {
@@ -44,17 +44,19 @@ export function getSettings(args: {
 		? (args.hemisphere as "north" | "south")
 		: DEFAULT_HEMISPHERE;
 	// Include hemisphere text
-	settings.includeHemisphereText =
-		typeof args.includeHemisphereText === "boolean"
-			? args.includeHemisphereText
+	settings.showHemisphereText =
+		typeof args.showHemisphereText === "boolean"
+			? args.showHemisphereText
 			: DEFAULT_SHOW_HEMISPHERE_TEXT;
 	// Date
+	let stringDate = args.date?.toString() || "";
 	const tryDate = new Date(
-		typeof args.date === "number" ? args.date : args.date?.toString() || "",
+		!isNaN(parseInt(stringDate)) ? parseInt(stringDate) : stringDate,
 	);
 	settings.date =
 		tryDate.toString() === "Invalid Date"
 			? Date.now() / 1000
 			: tryDate.getTime() / 1000;
+
 	return settings;
 }

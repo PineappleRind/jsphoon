@@ -4,7 +4,7 @@ import { ASPECT_RATIO, SECONDS_IN_DAY } from "@/constants/settings";
 import { type Language, translations } from "@/frontend/ii8n";
 import { type Settings } from "@/frontend/settings";
 import { createDateString, unixToJulian } from "@/utils/date";
-import moons from "@/moon";
+import moons from "@/moons";
 import { lolcat } from "./frontend/lolcat";
 
 export function printMoon(settings: Settings) {
@@ -98,7 +98,7 @@ function getLineOfMoon(
 			line += createDateString(
 				Math.trunc((phases[1] - julianDate) * SECONDS_IN_DAY),
 			);
-		} else if (lineNumber == centerLine + 2 && settings.includeHemisphereText) {
+		} else if (lineNumber == centerLine + 2 && settings.showHemisphereText) {
 			let msg =
 				settings.hemisphere === "north"
 					? translation.northernHemisphere
