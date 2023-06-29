@@ -35,9 +35,11 @@ export function printMoon(settings: Settings) {
 	if (!settings.noColor)
 		lolcat(text, {
 			seed: phaseDegrees * 100,
+			frequency: Math.max(0, 0.15 - Math.log2(settings.lines) / 48),
 		});
 }
-function getLineOfMoon(
+
+export function getLineOfMoon(
 	lineNumber: number,
 	julianDate: number,
 	moonRadius: { x: number; y: number },
@@ -46,9 +48,6 @@ function getLineOfMoon(
 	settings: Settings,
 ) {
 	let line = "";
-
-	const centerLine = Math.trunc(settings.lines / 2);
-	const { phases, which } = find2SurroundingPhases(julianDate);
 
 	const yCoordinate = lineNumber + 0.5 - moonRadius.y;
 	let xRight =
@@ -59,7 +58,7 @@ function getLineOfMoon(
 
 	const leftColumn = Math.trunc(moonRadius.x + 0.5) + Math.trunc(xLeft + 0.5);
 	const rightColumn = Math.trunc(moonRadius.x + 0.5) + Math.trunc(xRight + 0.5);
-	// Print it
+
 	let charNumber = 0;
 	let char;
 	while (charNumber < leftColumn) {
@@ -74,43 +73,61 @@ function getLineOfMoon(
 			char = rightMoon ? rightMoon[lineNumber][charNumber] : "@";
 		// read moons from bottom right to upper left
 		// equivalent of rotating 180 degrees (or flipping upside down)
-		else char = rightMoon ? rightMoon[-1 - lineNumber][-charNumber] : "@";
+		// use Array.at() because it can handle negative indices
+		else
+			char = rightMoon ? rightMoon.at(-1 - lineNumber)?.at(-charNumber) : "@";
+
 		charNumber++;
 		line += char;
 	}
 
-	if (settings.lines <= 32 && !settings.noText) {
-		const translation = findTranslation(settings.language);
-		// Output the end-of-line information, if any
-		line += "\t ";
-		if (lineNumber === centerLine - 2) {
-			// Now hopefully the object is in order.. 😅
-			const qlits = Object.values(translation).map((text) => `${text} +`);
-			line += qlits[Math.trunc(which[0] * 4)];
-		} else if (lineNumber === centerLine - 1) {
-			line += createDateString(
-				Math.trunc((julianDate - phases[0]) * SECONDS_IN_DAY),
-			);
-		} else if (lineNumber === centerLine) {
-			const nqlits = Object.values(translation).map((text) => `${text} -`);
-			line += nqlits[Math.trunc(which[1] * 4)];
-		} else if (lineNumber === centerLine + 1) {
-			line += createDateString(
-				Math.trunc((phases[1] - julianDate) * SECONDS_IN_DAY),
-			);
-		} else if (lineNumber === centerLine + 2 && settings.showHemisphereText) {
-			const msg =
-				settings.hemisphere === "north"
-					? translation.northernHemisphere
-					: translation.southernHemisphere;
-			line += msg;
-		}
+	const shouldPrintMetadata = settings.lines <= 32 && !settings.noText;
+	if (shouldPrintMetadata)
+		line += getMetadataForLine(lineNumber, settings, julianDate);
+
+	return line;
+}
+
+function getMetadataForLine(
+	lineNumber: number,
+	settings: Settings,
+	julianDate: number,
+): string {
+	const translation = findTranslation(settings.language);
+	const { phases, which } = find2SurroundingPhases(julianDate);
+	const centerLine = Math.trunc(settings.lines / 2);
+
+	// Output the end-of-line information, if any
+	let line = "\t ";
+	if (lineNumber === centerLine - 2) {
+		// Now hopefully the translation object is in order.. 😅
+		const qlits = Object.values(translation).map((text) => `${text} +`);
+		line += qlits[Math.trunc(which[0] * 4)];
+	} else if (lineNumber === centerLine - 1) {
+		line += createDateString(
+			Math.trunc((julianDate - phases[0]) * SECONDS_IN_DAY),
+		);
+	} else if (lineNumber === centerLine) {
+		const nqlits = Object.values(translation).map((text) => `${text} -`);
+		line += nqlits[Math.trunc(which[1] * 4)];
+	} else if (lineNumber === centerLine + 1) {
+		line += createDateString(
+			Math.trunc((phases[1] - julianDate) * SECONDS_IN_DAY),
+		);
+	} else if (lineNumber === centerLine + 2 && settings.showHemisphereText) {
+		const msg =
+			settings.hemisphere === "north"
+				? translation.northernHemisphere
+				: translation.southernHemisphere;
+		line += msg;
 	}
 	return line;
 }
 
-function findTranslation(language: Language) {
+export function findTranslation(language: Language) {
 	const translation = translations[language] || translations.en;
+	// fallback to english hemisphere translation
+	// if they don't exist for this language
 	if (Object.keys(translation).length < 6) {
 		translation.northernHemisphere = translations.en.northernHemisphere;
 		translation.southernHemisphere = translations.en.southernHemisphere;
