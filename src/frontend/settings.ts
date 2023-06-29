@@ -49,12 +49,13 @@ export function getSettingsFromArgs(args: {
 	if (tryBoolean(args.showHemisphereText))
 		settings.showHemisphereText = tryBoolean(args.showHemisphereText);
 
-	const stringDate = args.date?.toString() || "";
+	// Since +"" === 0, use a non-empty string if no date is supplied
+	const stringDate = args.date?.toString() || "No date supplied";
 	const tryDate = new Date(!isNaN(+stringDate) ? +stringDate : stringDate);
 	if (tryDate.toString() !== "Invalid Date")
 		settings.date = Math.trunc(tryDate.getTime() / 1000);
 
-	// Casting this to Settings should be typesafe as AFAIK 
+	// Casting this to Settings should be typesafe as AFAIK
 	// settings should never contain the wrong type for a field
 	return {
 		...getDefaultSettings(),

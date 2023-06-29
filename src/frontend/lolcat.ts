@@ -20,7 +20,7 @@ type Options = {
 
 let options: Options = {
 	seed: 0,
-	spread: 8.0,
+	spread: 4,
 	frequency: 0.05,
 };
 
