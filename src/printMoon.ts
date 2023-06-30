@@ -5,7 +5,7 @@ import { type Language, translations } from "@/frontend/ii8n";
 import { lolcat } from "@/frontend/lolcat";
 import { type Settings } from "@/frontend/settings";
 import moons from "@/moons";
-import { createDateString, unixToJulian } from "@/utils/date";
+import { dateFromJulianSeconds, unixToJulian } from "@/utils/date";
 
 export function printMoon(settings: Settings) {
 	const julianDate = unixToJulian(settings.date);
@@ -104,14 +104,14 @@ function getMetadataForLine(
 		const qlits = Object.values(translation).map((text) => `${text} +`);
 		line += qlits[Math.trunc(which[0] * 4)];
 	} else if (lineNumber === centerLine - 1) {
-		line += createDateString(
+		line += dateFromJulianSeconds(
 			Math.trunc((julianDate - phases[0]) * SECONDS_IN_DAY),
 		);
 	} else if (lineNumber === centerLine) {
 		const nqlits = Object.values(translation).map((text) => `${text} -`);
 		line += nqlits[Math.trunc(which[1] * 4)];
 	} else if (lineNumber === centerLine + 1) {
-		line += createDateString(
+		line += dateFromJulianSeconds(
 			Math.trunc((phases[1] - julianDate) * SECONDS_IN_DAY),
 		);
 	} else if (lineNumber === centerLine + 2 && settings.showHemisphereText) {

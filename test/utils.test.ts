@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { createDateString, julianToISO, unixToJulian } from "@/utils/date";
+import { dateFromJulianSeconds, julianToISO, unixToJulian } from "@/utils/date";
 import { angle as angleConversion, confineAngle } from "@/utils/math";
 
 describe("Math utils", () => {
@@ -28,7 +28,7 @@ describe("Date utils", () => {
 	});
 
 	test('Create date string from "secs"', () => {
-		expect(createDateString(201221)).toBe("2 7:53:41");
-		expect(createDateString(2710)).toBe("0 0:45:10");
+		expect(dateFromJulianSeconds(201221)).toBe("2 7:53:41");
+		expect(dateFromJulianSeconds(2710)).toBe("0 0:45:10");
 	});
 });
