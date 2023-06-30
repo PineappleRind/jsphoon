@@ -1,14 +1,13 @@
 <center>
     <h1><pre align="center">jsphoon</pre></h1>
     ASCII Art Phase of the Moon (TypeScript version)
-    <small><i>(I call it JSPhoon because it's more recognizable)</i></small>
 </center>
 
 -----
 
 The original version of this was by Jef Poskanzer jef@mail.acme.com (Twitter: @jef_poskanzer) written in Pascal in 1979.
 
-It's been translated by him into C, then by @igor_chubin into Python, and now by me into TypeScript.
+It's been translated by him into C, then by @igor_chubin [into Python](//github.com/chubin/pyphoon), and now by me into TypeScript.
 
 **I'm basing this one off of the Python version.**
 
