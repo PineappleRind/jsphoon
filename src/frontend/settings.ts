@@ -7,10 +7,9 @@ import {
 	DEFAULT_SIZE_LINES,
 } from "@/constants/settings";
 import { Language, translations } from "@/frontend/ii8n";
-import { Nullable } from "@/types/utils";
+import { Nullable } from "@/utils/types";
 
 export type Settings = {
-	/** UNIX Timestamp */
 	date: number;
 	lines: number;
 	noText: boolean;
@@ -36,9 +35,12 @@ export function getSettingsFromArgs(args: {
 	[arg: string]: boolean | string | undefined;
 }): Settings {
 	const settings: Nullable<Settings> = {} as Nullable<Settings>;
+
 	if (tryNumber(args.lines)) settings.lines = tryNumber(args.lines);
-	if (tryBoolean(args.noText)) settings.noText = tryBoolean(args.noText);
-	if (tryBoolean(args.noColor)) settings.noColor = tryBoolean(args.noColor);
+	if (tryBoolean(args["no-text"]))
+		settings.noText = tryBoolean(args["no-text"]);
+	if (tryBoolean(args["no-color"]))
+		settings.noColor = tryBoolean(args["no-color"]);
 
 	if (typeof args.language === "string" && args.language in translations)
 		settings.language = args.language as Language;
@@ -46,8 +48,8 @@ export function getSettingsFromArgs(args: {
 	if (["north", "south"].includes(args.hemisphere?.toString() || ""))
 		settings.hemisphere = args.hemisphere?.toString() as "north" | "south";
 
-	if (tryBoolean(args.showHemisphereText))
-		settings.showHemisphereText = tryBoolean(args.showHemisphereText);
+	if (tryBoolean(args["show-hemisphere-text"]))
+		settings.showHemisphereText = tryBoolean(args["show-hemisphere-text"]);
 
 	// Since +"" === 0, use a non-empty string if no date is supplied
 	const stringDate = args.date?.toString() || "No date supplied";

@@ -36,11 +36,13 @@ export type Language =
 	| "th"
 	| "ko"
 	| "kn"
+	| "zh_TW"
 	| "ar"
 	| "nb"
 	| "nn"
 	| "cy"
 	| "tr";
+
 export type Translation = {
 	newMoon: string;
 	firstQuarter: string;

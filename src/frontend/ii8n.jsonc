@@ -1,6 +1,9 @@
 /**
  * Pretty much ripped from pyphoon:
  * https://github.com/chubin/pyphoon/blob/master/pyphoon/lib/translations.py
+ 
+ * By the way, this is a .jsonc file, so comments are allowed.
+ * They're stripped before parseing so there are no errors! :D
  */
 {
 	"en": {

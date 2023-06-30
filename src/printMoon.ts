@@ -5,7 +5,7 @@ import { type Language, translations } from "@/frontend/ii8n";
 import { lolcat } from "@/frontend/lolcat";
 import { type Settings } from "@/frontend/settings";
 import moons from "@/moons";
-import { createDateString, unixToJulian } from "@/utils/date";
+import { dateStringFromJulianSeconds, unixToJulian } from "@/utils/date";
 
 export function printMoon(settings: Settings) {
 	const julianDate = unixToJulian(settings.date);
@@ -21,6 +21,7 @@ export function printMoon(settings: Settings) {
 	};
 
 	let text = "";
+
 	for (let lineNumber = 0; lineNumber < settings.lines; lineNumber++) {
 		const line = getLineOfMoon(
 			lineNumber,
@@ -37,6 +38,7 @@ export function printMoon(settings: Settings) {
 			seed: phaseDegrees * 100,
 			frequency: Math.max(0, 0.15 - Math.log2(settings.lines) / 48),
 		});
+	else process.stdout.write(text);
 }
 
 export function getLineOfMoon(
@@ -104,14 +106,14 @@ function getMetadataForLine(
 		const qlits = Object.values(translation).map((text) => `${text} +`);
 		line += qlits[Math.trunc(which[0] * 4)];
 	} else if (lineNumber === centerLine - 1) {
-		line += createDateString(
+		line += dateStringFromJulianSeconds(
 			Math.trunc((julianDate - phases[0]) * SECONDS_IN_DAY),
 		);
 	} else if (lineNumber === centerLine) {
 		const nqlits = Object.values(translation).map((text) => `${text} -`);
 		line += nqlits[Math.trunc(which[1] * 4)];
 	} else if (lineNumber === centerLine + 1) {
-		line += createDateString(
+		line += dateStringFromJulianSeconds(
 			Math.trunc((phases[1] - julianDate) * SECONDS_IN_DAY),
 		);
 	} else if (lineNumber === centerLine + 2 && settings.showHemisphereText) {
