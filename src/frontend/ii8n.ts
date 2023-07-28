@@ -1,7 +1,4 @@
-import { readFileSync } from "fs";
-import stripJsonComments from "strip-json-comments";
-
-const file = readFileSync("./src/frontend/ii8n.jsonc", { encoding: "utf-8" });
+import ii8n from "./ii8n.json";
 
 /** Hardcoded list of languages... */
 export type Language =
@@ -52,6 +49,4 @@ export type Translation = {
 	southernHemisphere: string;
 };
 export const phaseMap = ["newMoon", "firstQuarter", "fullMoon", "lastQuarter"];
-export const translations: Record<Language, Translation> = JSON.parse(
-	stripJsonComments(file),
-);
+export const translations: Record<Language, Translation> = ii8n;
