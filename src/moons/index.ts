@@ -8,7 +8,6 @@ import moon22 from "./22.txt";
 import moon23 from "./23.txt";
 import moon24 from "./24.txt";
 import moon32 from "./32.txt";
-console.log(moon15);
 
 export default {
 	"6": moon6,

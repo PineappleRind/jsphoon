@@ -68,7 +68,6 @@ function getLineOfMoon(
 	}
 	while (charNumber <= rightColumn) {
 		// The correct moon to use at this resolution
-		console.log(Object.keys(moons), settings.lines);
 		const rightMoon =
 			moons[settings.lines.toString() as keyof typeof moons]?.split("\n") ||
 			null;

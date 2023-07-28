@@ -5,7 +5,7 @@
   "scripts": {
     "format": "bun rome format --write .",
     "lint": "bun rome check .",
-    "bundle": "bun build --minify src/main.ts",
+    "bundle": "bun build --minify src/main.ts --outfile bundle.js",
     "test": "bun test"
   },
   "devDependencies": {
