@@ -39,7 +39,7 @@ export function julianToISO(epoch: number) {
  * Create a datestring for format 'dd HH:MM:SS'
  * may be a better way to do this with new Date()
  */
-export function createDateString(secs: number) {
+export function dateStringFromJulianSeconds(secs: number) {
 	// because of rome lint
 	let seconds = secs;
 	const days = Math.trunc(seconds / SECONDS_IN_DAY);
@@ -54,4 +54,12 @@ export function createDateString(secs: number) {
 
 	const padNumber = (x: number) => x.toString().padStart(2, "0");
 	return `${days} ${hours}:${padNumber(minutes)}:${padNumber(seconds)}`;
+}
+
+/**
+ * Basically just divide by 1000 and truncate...
+ * @returns A unix timestamp in seconds
+ */
+export function unixSecondsFromDate(date: Date) {
+	return Math.trunc(date.getTime() / 1000);
 }

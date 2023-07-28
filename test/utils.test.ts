@@ -1,6 +1,11 @@
 import { describe, expect, test } from "bun:test";
 
-import { createDateString, julianToISO, unixToJulian } from "@/utils/date";
+import {
+	dateStringFromJulianSeconds,
+	julianToISO,
+	unixSecondsFromDate,
+	unixToJulian,
+} from "@/utils/date";
 import { angle as angleConversion, confineAngle } from "@/utils/math";
 
 describe("Math utils", () => {
@@ -27,8 +32,14 @@ describe("Date utils", () => {
 		expect(julianToISO(2434121.446111)).toEqual([1952, 4, 18]);
 	});
 
-	test('Create date string from "secs"', () => {
-		expect(createDateString(201221)).toBe("2 7:53:41");
-		expect(createDateString(2710)).toBe("0 0:45:10");
+	test("Create date string from Julian seconds", () => {
+		expect(dateStringFromJulianSeconds(201221)).toBe("2 7:53:41");
+		expect(dateStringFromJulianSeconds(2710)).toBe("0 0:45:10");
+	});
+
+	test("Date() to Unix timestamp in seconds", () => {
+		expect(unixSecondsFromDate(new Date(Date.UTC(2024, 3, 1, 5, 43)))).toBe(
+			1711950180,
+		);
 	});
 });

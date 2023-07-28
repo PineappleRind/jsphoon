@@ -7,9 +7,9 @@ import {
 	DEFAULT_SIZE_LINES,
 } from "@/constants/settings";
 import { Language, translations } from "@/frontend/ii8n";
+import { Nullable } from "@/utils/types";
 
 export type Settings = {
-	/** UNIX Timestamp */
 	date: number;
 	lines: number;
 	noText: boolean;
@@ -19,45 +19,59 @@ export type Settings = {
 	showHemisphereText: boolean;
 };
 
-export function getSettings(args: {
-	[arg: string]: boolean | string | number | undefined;
-}) {
-	const settings: Settings = {} as Settings;
-	// Resolution
-	settings.lines = !isNaN(parseInt(args.lines?.toString() || ""))
-		? parseInt(args.lines?.toString() as string)
-		: DEFAULT_SIZE_LINES;
-	// Don't print text
-	settings.noText =
-		typeof args.noText === "boolean" ? args.noText : DEFAULT_NO_TEXT;
-	// Don't print colors
-	settings.noColor =
-		typeof args.noColor === "boolean" ? args.noColor : DEFAULT_NO_COLOR;
-	// Language
-	settings.language =
-		typeof args.language === "string" && args.language in translations
-			? (args.language as Language)
-			: DEFAULT_LANGUAGE;
-	// Hemisphere
-	settings.hemisphere = ["north", "south"].includes(
-		args.hemisphere?.toString() || "",
-	)
-		? (args.hemisphere as "north" | "south")
-		: DEFAULT_HEMISPHERE;
-	// Include hemisphere text
-	settings.showHemisphereText =
-		typeof args.showHemisphereText === "boolean"
-			? args.showHemisphereText
-			: DEFAULT_SHOW_HEMISPHERE_TEXT;
-	// Date
-	const stringDate = args.date?.toString() || "";
-	const tryDate = new Date(
-		!isNaN(parseInt(stringDate)) ? parseInt(stringDate) : stringDate,
-	);
-	settings.date =
-		tryDate.toString() === "Invalid Date"
-			? Date.now() / 1000
-			: tryDate.getTime() / 1000;
+export function getDefaultSettings(): Settings {
+	return {
+		date: Math.trunc(Date.now() / 1000),
+		language: DEFAULT_LANGUAGE,
+		lines: DEFAULT_SIZE_LINES,
+		noColor: DEFAULT_NO_COLOR,
+		noText: DEFAULT_NO_TEXT,
+		hemisphere: DEFAULT_HEMISPHERE,
+		showHemisphereText: DEFAULT_SHOW_HEMISPHERE_TEXT,
+	};
+}
 
-	return settings;
+export function getSettingsFromArgs(args: {
+	[arg: string]: boolean | string | undefined;
+}): Settings {
+	const settings: Nullable<Settings> = {} as Nullable<Settings>;
+
+	if (tryNumber(args.lines)) settings.lines = tryNumber(args.lines);
+	if (tryBoolean(args["no-text"]))
+		settings.noText = tryBoolean(args["no-text"]);
+	if (tryBoolean(args["no-color"]))
+		settings.noColor = tryBoolean(args["no-color"]);
+
+	if (typeof args.language === "string" && args.language in translations)
+		settings.language = args.language as Language;
+
+	if (["north", "south"].includes(args.hemisphere?.toString() || ""))
+		settings.hemisphere = args.hemisphere?.toString() as "north" | "south";
+
+	if (tryBoolean(args["show-hemisphere-text"]))
+		settings.showHemisphereText = tryBoolean(args["show-hemisphere-text"]);
+
+	// Since +"" === 0, use a non-empty string if no date is supplied
+	const stringDate = args.date?.toString() || "No date supplied";
+	const tryDate = new Date(!isNaN(+stringDate) ? +stringDate : stringDate);
+	if (tryDate.toString() !== "Invalid Date")
+		settings.date = Math.trunc(tryDate.getTime() / 1000);
+
+	// Casting this to Settings should be typesafe as AFAIK
+	// settings should never contain the wrong type for a field
+	return {
+		...getDefaultSettings(),
+		...settings,
+	} as Settings;
+}
+
+function tryNumber(target: string | boolean | undefined) {
+	const maybeNumber = parseInt(target?.toString() || "");
+	return isNaN(maybeNumber) ? null : maybeNumber;
+}
+
+function tryBoolean(target: string | boolean | undefined): boolean {
+	const maybeBoolean =
+		target === "false" ? false : target === "true" ? true : !!target;
+	return maybeBoolean;
 }
