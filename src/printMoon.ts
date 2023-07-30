@@ -72,10 +72,7 @@ export function getLineOfMoon(
 		const rightMoon =
 			moons[settings.lines.toString() as keyof typeof moons]?.split("\n") ||
 			null;
-		if (!rightMoon[lineNumber]) {
-			charNumber++;
-			continue;
-		}
+			
 		if (settings.hemisphere === "north")
 			// Read moons from upper left to bottom right
 			char = rightMoon ? rightMoon[lineNumber][charNumber] || " " : "@";

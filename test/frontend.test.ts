@@ -1,8 +1,4 @@
-import {
-	Settings,
-	getDefaultSettings,
-	getSettingsFromArgs,
-} from "@/frontend/settings";
+import { Settings, getDefaultSettings, getSettings } from "@/frontend/settings";
 import { describe, expect, test } from "bun:test";
 
 describe("User-facing", () => {
@@ -10,18 +6,16 @@ describe("User-facing", () => {
 		const defaultSettings: Settings = getDefaultSettings();
 
 		expect(
-			getSettingsFromArgs({
+			getSettings({
 				date: "wodwue",
 				lines: "wodwue",
 			}),
-		).toEqual({
-			...defaultSettings,
-		});
+		).toBeEmpty();
 
 		expect(
-			getSettingsFromArgs({
+			getSettings({
 				date: "2022-01-12",
-				"show-hemisphere-text": true,
+				showHemisphereText: true,
 				language: "language-doesnot-exist",
 			}),
 		).toEqual({
@@ -31,7 +25,7 @@ describe("User-facing", () => {
 		});
 
 		expect(
-			getSettingsFromArgs({
+			getSettings({
 				date: "2020-09-24T06:02",
 				language: "hy",
 				lines: "71",

@@ -70,6 +70,10 @@ describe("Print moon", () => {
 		).toBe(
 			" |          @                             @@@@@       @@@       \t Վերջին քառորդ -",
 		);
+
+		expect(
+			getLineOfMoon(17, 2462500.5487612407, { "y": 15.5, "x": 31 }, 1.1972631804049843, -0.36490721706428947, { "date": 1893287413, "lines": 31, "noText": false, "noColor": false, "language": "en", "hemisphere": "south", "showHemisphereText": true })
+		).toBe("                                         @@@@@@@@@@@@@@@@@@@@@  Southern Hemisphere")
 	});
 
 	test("Get translation", () => {
